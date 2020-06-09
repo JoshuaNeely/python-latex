@@ -54,8 +54,3 @@ def sample_callback(event_type, file_path):
 
   elif event_type == 'modified': 
     print("Watchdog received modified event - {}".format(file_path))
-
-
-if __name__ == "__main__":
-  watcher = Watcher(sample_callback)
-  watcher.run()

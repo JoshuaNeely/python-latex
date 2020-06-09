@@ -1,7 +1,7 @@
 #!/bin/python3
 import os, glob
 from latex import build_pdf, LatexBuildError
-import watcher
+from .watcher import Watcher
 
 
 def compile_tex(tex_filename, printLog=True):
@@ -29,7 +29,6 @@ def compile_tex_watcher_callback(event_type, file_path):
     compile_tex(file_path)
 
 
-if __name__ == '__main__':
+def main():
   print('Watching for changes to any .tex file the local directory')
-  watcher_instance = watcher.Watcher(compile_tex_watcher_callback)
-  watcher_instance.run()
+  Watcher(compile_tex_watcher_callback).run()
