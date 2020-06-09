@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
   name='python-latex',  
-  version='1.0.0',
+  version='1.0.1',
   author="Joshua Neely",
   author_email="joshua.a.neely@gmail.com",
   description="Convenience wrappers around latex compilation with python",
