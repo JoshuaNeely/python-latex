@@ -6,11 +6,10 @@ import watcher
 
 def build_resume(file_name_glob='*.tex'):
   for file_name in glob.glob(file_name_glob):
-    print('compiling {}'.format(file_name))
-    compile_tex(file_name);
+    compile_tex(file_name)
 
 
-def compile_tex(tex_filename):
+def compile_tex(tex_filename, printLog=True):
   base_filename = tex_filename.split('.tex')[0]
   pdf_filename = '{}{}'.format(base_filename, '.pdf')
 
@@ -20,6 +19,8 @@ def compile_tex(tex_filename):
     try:
       pdf = build_pdf(tex_file, texinputs=[current_dir, ''])
       pdf.save_to(pdf_filename)
+      if printLog:
+        print('compiling {} to {}'.format(tex_filename, pdf_filename))
 
     except LatexBuildError as e:
       for err in e.get_errors():
@@ -34,5 +35,6 @@ def compile_resume_watcher_callback(event_type, file_path):
 
 
 if __name__ == '__main__':
+  print('Watching for changes to any .tex file the local directory')
   watcher_instance = watcher.Watcher(compile_resume_watcher_callback)
   watcher_instance.run()
